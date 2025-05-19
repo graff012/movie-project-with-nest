@@ -18,6 +18,7 @@ import { resolve } from 'path';
 import { AdminMoviesService } from './movies.service';
 import { AuthGuard } from '../../common/guard/auth.guard';
 import { Request, Express } from 'express';
+import { ForbiddenException } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { UploadMovieFileDto } from './dto/upload-movie-file.dto';
@@ -25,6 +26,7 @@ import { UploadMovieFileDto } from './dto/upload-movie-file.dto';
 interface AuthenticatedRequest extends Request {
   user: {
     id: string;
+    role: 'user' | 'admin' | 'superadmin';
   };
 }
 
@@ -33,8 +35,15 @@ interface AuthenticatedRequest extends Request {
 export class AdminMoviesController {
   constructor(private readonly moviesService: AdminMoviesService) {}
 
+  private checkAdminRole(user: AuthenticatedRequest['user']) {
+    if (user.role !== 'admin' && user.role !== 'superadmin') {
+      throw new ForbiddenException('Only admin users can perform this action');
+    }
+  }
+
   @Get('movies')
-  async getMovies() {
+  async getMovies(@Req() req: AuthenticatedRequest) {
+    this.checkAdminRole(req.user);
     return this.moviesService.getMovies();
   }
 
@@ -56,6 +65,7 @@ export class AdminMoviesController {
     @Body() createMovieDto: CreateMovieDto,
     @UploadedFile() poster?: Express.Multer.File,
   ) {
+    this.checkAdminRole(req.user);
     return this.moviesService.createMovie(req.user.id, createMovieDto, poster);
   }
 
