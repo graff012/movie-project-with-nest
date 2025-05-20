@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { AdminInitController } from './admin-init.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from '../core/database/prisma.module';
+import { PrismaModule } from '../../core/database/prisma.module';
 import { SubscriptionsModule } from '../subscriptions/subscription.module';
 
 @Module({
@@ -19,6 +19,6 @@ import { SubscriptionsModule } from '../subscriptions/subscription.module';
   ],
   controllers: [AuthController, AdminInitController],
   providers: [AuthService],
-  exports: [AuthService],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
