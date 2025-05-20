@@ -1,8 +1,8 @@
 import { Controller, Get, Param, SetMetadata } from '@nestjs/common';
 import { UserService } from './users.service';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../common/guard/auth.guard';
-import { RoleGuard } from '../common/guard/role.guard';
+import { AuthGuard } from '../../common/guard/auth.guard';
+import { RoleGuard } from '../../common/guard/role.guard';
 
 @Controller('users')
 @UseGuards(AuthGuard, RoleGuard)

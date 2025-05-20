@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
-import { AuthGuard } from 'src/modules/common/guard/auth.guard';
+import { AuthGuard } from 'src/common/guard/auth.guard';
 
 @Controller('api/movies')
 @UseGuards(AuthGuard)

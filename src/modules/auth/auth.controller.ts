@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../common/guard/auth.guard';
+import { AuthGuard } from '../../common/guard/auth.guard';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import {

@@ -8,7 +8,7 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { AuthGuard } from '../common/guard/auth.guard';
+import { AuthGuard } from '../../common/guard/auth.guard';
 import { FavoritesService } from './favorites.service';
 import { GetFavoritesDto } from './dto/get-favorites.dto';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';

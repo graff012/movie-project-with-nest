@@ -16,7 +16,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { resolve } from 'path';
 import { AdminMoviesService } from './movies.service';
-import { AuthGuard } from '../../common/guard/auth.guard';
+import { AuthGuard } from '../../../common/guard/auth.guard';
 import { Request, Express } from 'express';
 import { ForbiddenException } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
